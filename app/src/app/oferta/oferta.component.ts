@@ -14,12 +14,12 @@ export class OfertaComponent implements OnInit {
   constructor(
     private route: ActivatedRoute, 
     private ofertasService: OfertasService
-  ) {  }
+  ) { }
 
 
   ngOnInit(): void {
-    this.ofertasService.getOfertasPorId(this.route.snapshot.params['id'])
-      .then((oferta:Oferta) => {
+    this.ofertasService.getOfertaPorId(this.route.snapshot.params['id'])
+      .then((oferta: Oferta) => {
         this.oferta = oferta
       })
   }
