@@ -6,7 +6,7 @@ import { Oferta } from "./../shared/oferta.model";
   selector: "app-home",
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.css"],
-  providers: [OfertasService]
+  providers: [OfertasService],
 })
 export class HomeComponent implements OnInit {
   public ofertas: Oferta[];
