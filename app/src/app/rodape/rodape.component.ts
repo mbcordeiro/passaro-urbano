@@ -8,5 +8,5 @@ import { Component, OnInit } from "@angular/core";
 export class RodapeComponent implements OnInit {
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit() {}
 }
