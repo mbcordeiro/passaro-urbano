@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { OrdemCompraService } from "./../ordem-compra.service";
-import { Pedido } from "./../shared/pedido.model";
+import { OrdemCompraService } from "../ordem-compra.service";
+import { Pedido } from "../shared/pedido.model";
 
 @Component({
   selector: "app-ordem-compra",
@@ -9,6 +9,10 @@ import { Pedido } from "./../shared/pedido.model";
   providers: [OrdemCompraService],
 })
 export class OrdemCompraComponent implements OnInit {
+  public idPedidoCompra: number;
+
+  public pedido: Pedido = new Pedido("", "", "", "");
+
   public endereco: string = "";
   public numero: string = "";
   public complemento: string = "";
@@ -26,16 +30,16 @@ export class OrdemCompraComponent implements OnInit {
 
   public formEstado: string = "disabled";
 
-  public pedido: Pedido = new Pedido("", "", "", "");
-
   constructor(private ordemCompraService: OrdemCompraService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     //this.ordemCompraService.efetivarCompra()
   }
 
-  public atualizaEnderco(endereco: string): void {
+  public atualizaEndereco(endereco: string): void {
     this.endereco = endereco;
+    //console.log(this.endereco)
+
     this.enderecoEstadoPrimitivo = false;
 
     if (this.endereco.length > 3) {
@@ -44,11 +48,13 @@ export class OrdemCompraComponent implements OnInit {
       this.enderecoValido = false;
     }
 
-    this.habilitarForm();
+    this.habilitaForm();
   }
 
   public atualizaNumero(numero: string): void {
     this.numero = numero;
+    //console.log(this.numero)
+
     this.numeroEstadoPrimitivo = false;
 
     if (this.numero.length > 0) {
@@ -57,22 +63,26 @@ export class OrdemCompraComponent implements OnInit {
       this.numeroValido = false;
     }
 
-    this.habilitarForm();
+    this.habilitaForm();
   }
 
-  public atualizaComplmento(complemento: string): void {
+  public atualizaComplemento(complemento: string): void {
     this.complemento = complemento;
+    //console.log(this.complemento)
+
     this.complementoEstadoPrimitivo = false;
 
     if (this.complemento.length > 0) {
       this.complementoValido = true;
     }
 
-    this.habilitarForm();
+    this.habilitaForm();
   }
 
   public atualizaFormaPagamento(formaPagamento: string): void {
     this.formaPagamento = formaPagamento;
+    console.log(this.formaPagamento);
+
     this.formaPagamentoEstadoPrimitivo = false;
 
     if (this.formaPagamento.length > 0) {
@@ -81,24 +91,31 @@ export class OrdemCompraComponent implements OnInit {
       this.formaPagamentoValido = false;
     }
 
-    this.habilitarForm();
+    this.habilitaForm();
   }
 
-  public habilitarForm(): void {
+  public habilitaForm(): void {
     if (
       this.enderecoValido === true &&
       this.numeroValido === true &&
       this.formaPagamentoValido === true
     ) {
       this.formEstado = "";
+    } else {
+      this.formEstado = "disabled";
     }
   }
 
-  confirmarCompra(): void {
+  public confirmarCompra(): void {
     this.pedido.endereco = this.endereco;
     this.pedido.numero = this.numero;
     this.pedido.complemento = this.complemento;
     this.pedido.formaPagamento = this.formaPagamento;
-    this.ordemCompraService.efetivarCompra(this.pedido).subscribe();
+
+    this.ordemCompraService
+      .efetivarCompra(this.pedido)
+      .subscribe((idPedido: number) => {
+        this.idPedidoCompra = idPedido;
+      });
   }
 }
