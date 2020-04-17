@@ -2,6 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule, LOCALE_ID } from "@angular/core";
 import { HttpModule } from "@angular/http";
 import { RouterModule } from "@angular/router";
+import { FormsModule } from "@angular/forms";
 
 import { ROUTES } from "./app.routes";
 
@@ -17,8 +18,8 @@ import { OndeFicaComponent } from "./oferta/onde-fica/onde-fica.component";
 
 //pipe
 import { DescricaoReduzida } from "./util/descricao-reduzida.pipe";
-import { OrdemCompraComponent } from './ordem-compra/ordem-compra.component';
-import { OrdemCompraSucessoComponent } from './ordem-compra-sucesso/ordem-compra-sucesso.component';
+import { OrdemCompraComponent } from "./ordem-compra/ordem-compra.component";
+import { OrdemCompraSucessoComponent } from "./ordem-compra-sucesso/ordem-compra-sucesso.component";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,12 @@ import { OrdemCompraSucessoComponent } from './ordem-compra-sucesso/ordem-compra
     OrdemCompraComponent,
     OrdemCompraSucessoComponent,
   ],
-  imports: [BrowserModule, HttpModule, RouterModule.forRoot(ROUTES)],
+  imports: [
+    BrowserModule,
+    HttpModule,
+    FormsModule,
+    RouterModule.forRoot(ROUTES),
+  ],
   providers: [{ provide: LOCALE_ID, useValue: "pt-Br" }],
   bootstrap: [AppComponent],
 })
