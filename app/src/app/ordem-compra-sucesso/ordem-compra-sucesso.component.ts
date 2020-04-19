@@ -6,8 +6,8 @@ import { Component, OnInit, Input } from "@angular/core";
   styleUrls: ["./ordem-compra-sucesso.component.css"],
 })
 export class OrdemCompraSucessoComponent implements OnInit {
+  @Input() public idPedidoCompra: number;
 
-  @Input() public idPedidoCompra: number
   constructor() {}
 
   ngOnInit(): void {}

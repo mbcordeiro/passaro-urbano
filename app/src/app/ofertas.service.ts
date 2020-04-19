@@ -11,8 +11,6 @@ import "rxjs/add/operator/retry";
 
 @Injectable()
 export class OfertasService {
-  //private url_api = 'http://localhost:3000/ofertas'
-
   constructor(private http: Http) {}
 
   public getOfertas(): Promise<Oferta[]> {
